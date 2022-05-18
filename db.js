@@ -1,13 +1,22 @@
 // const {
-//     mongoose
-// } = require('mongoose');
+//    MongoClient
+// } = require('mongodb');
+// const url = "mongodb://localhost:27017/demo";
 
-// mongoose.connect("mongodb://localhost/testdb")
+// const client = new MongoClient(url);
 
+// module.exports = {
+//    client
+// }
 
-const mongo = require('mongodb').MongoClient
-const url = "mongodb://localhost:27017";
+const mongoose = require('mongoose');
+const url = "mongodb://localhost:27017/demo";
 
-mongo.connect(url, function (err, client) {
-   console.log('connect success!');
-});
+module.exports = {
+   connect: () => {
+      mongoose.connect(url, {
+         useNewUrlParser: true,
+         useUnifiedTopology: true
+      }).then(() => console.log('Database is connected.'))
+   }
+}
