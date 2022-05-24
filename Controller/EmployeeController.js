@@ -12,27 +12,20 @@ const GetEmployee = async (req, res, next) => {
 const AddEmployee = async (req, res, next) => {
 
     let body = req.body;
-    if (body.name && body.age) {
-        await Employee.create({
-            name: body.name,
-            age: body.age
-        }).catch(err=>{
-            res.json({
-                success: false,
-                msg: '發生錯誤'
-            })
-        })
-        res.json({
-            success: true,
-            msg: '新增成功'
-        })
-    } else {
 
+    await Employee.create({
+        name: body.name ? body.name : null,
+        age: body.age ? body.age : null
+    }).catch(err => {
         res.json({
             success: false,
-            msg: '格式錯誤'
+            msg: '發生錯誤'
         })
-    }
+    })
+    res.json({
+        success: true,
+        msg: '新增成功'
+    })
 
 
 }
